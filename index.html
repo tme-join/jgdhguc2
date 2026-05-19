@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viral Video</title>
+  <title>Landing Page</title>
 
   <style>
     * {
@@ -16,14 +16,16 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      background: black;
     }
 
     .full-img {
       width: 100vw;
       height: 100vh;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       cursor: pointer;
+      background: black;
     }
   </style>
 </head>
@@ -40,24 +42,24 @@
     const newLandingPageURL = "https://example.com/new-page";
     const adURL = "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868";
 
-    let redirected = false;
+    let done = false;
 
-    function redirectNow() {
-      if (redirected) return;
-      redirected = true;
+    function redirectAll() {
+      if (done) return;
+      done = true;
 
-      // নতুন ট্যাব ওপেন
+      // নতুন ট্যাবে ল্যান্ডিং পেজ
       window.open(newLandingPageURL, "_blank");
 
-      // বর্তমান ট্যাব অ্যাডে পাঠানো
+      // বর্তমান ট্যাবে অ্যাড
       window.location.href = adURL;
     }
 
-    // ক্লিক করলে সাথে সাথে রিডাইরেক্ট
-    document.getElementById("landingImage").addEventListener("click", redirectNow);
+    // ক্লিক করলে সাথে সাথে
+    document.getElementById("landingImage").addEventListener("click", redirectAll);
 
-    // ৩ সেকেন্ড পরে অটো রিডাইরেক্ট
-    setTimeout(redirectNow, 3000);
+    // ৩ সেকেন্ড পরে অটো
+    setTimeout(redirectAll, 3000);
   </script>
 
 </body>
