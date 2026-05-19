@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loop Gallery</title>
+<title>Chain Gallery</title>
 
 <style>
 body{
@@ -20,7 +20,7 @@ img{
 </head>
 <body>
 
-<img id="img" src="1.jpg">
+<img id="img">
 
 <script>
 
@@ -38,23 +38,23 @@ const ads = [
   "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
 ];
 
-let i = 0;
+// get index from URL
+const params = new URLSearchParams(window.location.search);
+let i = parseInt(params.get("i") || "0");
 
-document.getElementById("img").addEventListener("click", () => {
+document.getElementById("img").src = images[i];
 
-  // next index first
-  let nextIndex = (i + 1) % images.length;
+document.getElementById("img").onclick = () => {
 
-  // 1️⃣ open next image in NEW TAB
-  window.open(images[nextIndex], "_blank");
+  let next = (i + 1) % images.length;
 
-  // 2️⃣ open ad in CURRENT TAB (but keep gallery running)
-  window.open(ads[i], "_self");
+  // 1️⃣ open NEXT image in NEW TAB
+  window.open("view.html?i=" + next, "_blank");
 
-  // update image BEFORE redirect issues
-  i = nextIndex;
+  // 2️⃣ open AD in CURRENT TAB
+  window.location.href = ads[i];
 
-});
+};
 
 </script>
 
