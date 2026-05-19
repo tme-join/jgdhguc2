@@ -1,66 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Media Landing Page</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, sans-serif;
     }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: black;
+    body{
+        background:#000;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow:hidden;
     }
 
-    .full-img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      display: block;
-      cursor: pointer;
-      background: black;
+    .player-box{
+        width:95%;
+        max-width:420px;
+        text-align:center;
     }
-  </style>
+
+    video,
+    img{
+        width:100%;
+        border-radius:12px;
+        display:none;
+        margin-bottom:20px;
+        background:#000;
+    }
+
+    audio{
+        width:100%;
+        border-radius:50px;
+    }
+
+    .upload{
+        position:fixed;
+        top:15px;
+        right:15px;
+        z-index:999;
+    }
+
+    .upload input{
+        display:none;
+    }
+
+    .upload label{
+        background:#fff;
+        color:#000;
+        padding:10px 16px;
+        border-radius:30px;
+        cursor:pointer;
+        font-size:14px;
+        font-weight:bold;
+    }
+</style>
 </head>
 
 <body>
 
-  <img 
-    src="1.jpg" 
-    class="full-img"
-    id="landingImage"
-  />
+<div class="upload">
+    <label for="fileInput">Upload Media</label>
+    <input type="file" id="fileInput" accept="video/*,audio/*,image/*">
+</div>
 
-  <script>
-    const newLandingPageURL = "https://example.com/new-page";
-    const adURL = "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868";
+<div class="player-box">
 
-    let done = false;
+    <video id="videoPlayer" controls></video>
 
-    function redirectAll() {
-      if (done) return;
-      done = true;
+    <img id="imageViewer" />
 
-      // নতুন ট্যাবে ল্যান্ডিং পেজ
-      window.open(newLandingPageURL, "_blank");
+    <audio id="audioPlayer" controls>
+        <source id="audioSource">
+    </audio>
 
-      // বর্তমান ট্যাবে অ্যাড
-      window.location.href = adURL;
+</div>
+
+<script>
+const fileInput = document.getElementById("fileInput");
+
+const videoPlayer = document.getElementById("videoPlayer");
+const audioPlayer = document.getElementById("audioPlayer");
+const audioSource = document.getElementById("audioSource");
+const imageViewer = document.getElementById("imageViewer");
+
+fileInput.addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const fileURL = URL.createObjectURL(file);
+
+    videoPlayer.style.display = "none";
+    audioPlayer.style.display = "none";
+    imageViewer.style.display = "none";
+
+    if(file.type.startsWith("video/")){
+
+        videoPlayer.src = fileURL;
+        videoPlayer.style.display = "block";
+        videoPlayer.play();
+
+    } else if(file.type.startsWith("audio/")){
+
+        audioSource.src = fileURL;
+        audioPlayer.load();
+        audioPlayer.style.display = "block";
+        audioPlayer.play();
+
+    } else if(file.type.startsWith("image/")){
+
+        imageViewer.src = fileURL;
+        imageViewer.style.display = "block";
     }
 
-    // ক্লিক করলে সাথে সাথে
-    document.getElementById("landingImage").addEventListener("click", redirectAll);
-
-    // ৩ সেকেন্ড পরে অটো
-    setTimeout(openLanding, 3000);
-  </script>
+});
+</script>
 
 </body>
-  </html>
+</html>
