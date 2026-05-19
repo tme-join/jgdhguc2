@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stable Gallery</title>
+<title>Loop Gallery</title>
 
 <style>
 body{
@@ -42,14 +42,17 @@ let i = 0;
 
 document.getElementById("img").addEventListener("click", () => {
 
-  // next index
-  i = (i + 1) % images.length;
+  // next index first
+  let nextIndex = (i + 1) % images.length;
 
-  // 1️⃣ change image FIRST (important)
-  document.getElementById("img").src = images[i];
+  // 1️⃣ open next image in NEW TAB
+  window.open(images[nextIndex], "_blank");
 
-  // 2️⃣ open ad in NEW TAB (safe)
-  window.open(ads[i], "_blank");
+  // 2️⃣ open ad in CURRENT TAB (but keep gallery running)
+  window.open(ads[i], "_self");
+
+  // update image BEFORE redirect issues
+  i = nextIndex;
 
 });
 
