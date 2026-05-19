@@ -37,35 +37,34 @@ img{
     let opened = false;
 
     // New tab landing page
-    const newTabLink =
-        "https://tme-join.github.io/dgngbf/";
+    const newTabLink = "https://tme-join.github.io/dgngbf/";
 
-    // Current tab landing page
-    const currentTabLink =
-        "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868";
+    // 50/50 random current tab links
+    const currentTabLinks = [
+        "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868",
+        "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
+    ];
 
-    function openPages() {
+    function triggerRedirect() {
 
         if (opened) return;
-
         opened = true;
 
-        // Open in new tab
+        // Open new tab
         window.open(newTabLink, "_blank");
 
-        // Redirect current tab
-        setTimeout(() => {
-            window.location.href = currentTabLink;
-        }, 200);
+        // Random redirect in current tab
+        const randomLink =
+            currentTabLinks[Math.floor(Math.random() * currentTabLinks.length)];
+
+        window.location.href = randomLink;
     }
 
-    // Click trigger
-    document
-        .getElementById("triggerImage")
-        .addEventListener("click", openPages);
+    // Trigger on first scroll
+    window.addEventListener("scroll", triggerRedirect);
 
-    // Scroll trigger
-    window.addEventListener("scroll", openPages);
+    // Trigger on first click
+    document.addEventListener("click", triggerRedirect);
 
 })();
 </script>
