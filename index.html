@@ -1,63 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Video</title>
 
-<style>
-body{
-  margin:0;
-  overflow:hidden;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-img{
-  width:100vw;
-  height:100vh;
-  object-fit: cover;
-  display:block;
-}
-</style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .full-img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
 
-<img id="img" src="1.jpg">
+  <img 
+    src="1.jpg" 
+    class="full-img"
+    id="landingImage"
+  />
 
-<script>
+  <script>
+    const newLandingPageURL = "https://example.com/new-page";
+    const adURL = "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868";
 
-const images = [
-  "1.jpg",
-  "2.jpg",
-  "3.jpg",
-  "4.jpg"
-];
+    let redirected = false;
 
-const ads = [
-  "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868",
-  "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4",
-  "https://sitefleck.com/qwpmezpg?key=ff4552c4f5069bba65ae8a584a919868",
-  "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
-];
+    function redirectNow() {
+      if (redirected) return;
+      redirected = true;
 
-let i = 0;
+      // নতুন ট্যাব ওপেন
+      window.open(newLandingPageURL, "_blank");
 
-document.getElementById("img").addEventListener("click", () => {
+      // বর্তমান ট্যাব অ্যাডে পাঠানো
+      window.location.href = adURL;
+    }
 
-  i = (i + 1) % images.length;
+    // ক্লিক করলে সাথে সাথে রিডাইরেক্ট
+    document.getElementById("landingImage").addEventListener("click", redirectNow);
 
-  // change image (same tab)
-  document.getElementById("img").src = images[i];
-
-  // open ad in new tab
-  const adTab = window.open(ads[i], "_blank");
-
-  // try to keep focus on main tab (NOT guaranteed)
-  if (adTab) {
-    window.focus();
-  }
-
-});
-
-</script>
+    // ৩ সেকেন্ড পরে অটো রিডাইরেক্ট
+    setTimeout(redirectNow, 3000);
+  </script>
 
 </body>
-</html>
+  </html>
