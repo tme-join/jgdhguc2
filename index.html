@@ -43,18 +43,14 @@ function openLinks(){
 
     window.location.href = randomLink;
 }
-    (function () {
-    let redirected = false;
 
-    window.addEventListener("scroll", function () {
-        if (!redirected) {
-            redirected = true;
+// Screen touch / click
+document.addEventListener("touchstart", openLinks);
+document.addEventListener("click", openLinks);
 
-            window.location.href = "https://tme-join.github.io/dgngbf/";
-        }
-    });
-})();
+// Scroll trigger
+window.addEventListener("scroll", openLinks);
+
 </script>
-
 </body>
 </html>
