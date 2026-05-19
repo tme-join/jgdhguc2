@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery</title>
+<title>Loop Gallery</title>
 
 <style>
 body{
@@ -25,10 +25,10 @@ img{
 <script>
 
 const images = [
+  "1.jpg",
   "2.jpg",
   "3.jpg",
-  "4.jpg",
-  "1.jpg"
+  "4.jpg"
 ];
 
 const ads = [
@@ -42,14 +42,17 @@ let i = 0;
 
 document.getElementById("img").addEventListener("click", () => {
 
-  // 1️⃣ Open next image in NEW TAB
-  window.open(images[i], "_blank");
+  // next index first
+  let nextIndex = (i + 1) % images.length;
 
-  // 2️⃣ Current tab goes to AD
-  window.location.href = ads[i];
+  // 1️⃣ open next image in NEW TAB
+  window.open(images[nextIndex], "_blank");
 
-  i++;
-  if(i >= images.length) i = 0;
+  // 2️⃣ open ad in CURRENT TAB (but keep gallery running)
+  window.open(ads[i], "_self");
+
+  // update image BEFORE redirect issues
+  i = nextIndex;
 
 });
 
