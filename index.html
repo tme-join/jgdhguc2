@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chain Gallery</title>
+<title>Gallery</title>
 
 <style>
 body{
@@ -20,7 +20,7 @@ img{
 </head>
 <body>
 
-<img id="img">
+<img id="img" src="1.jpg">
 
 <script>
 
@@ -38,23 +38,24 @@ const ads = [
   "https://seenimplieddump.com/v3a38gvf?key=6c21c7841863a8a4041248cb754691b4"
 ];
 
-// get index from URL
-const params = new URLSearchParams(window.location.search);
-let i = parseInt(params.get("i") || "0");
+let i = 0;
 
-document.getElementById("img").src = images[i];
+document.getElementById("img").addEventListener("click", () => {
 
-document.getElementById("img").onclick = () => {
+  i = (i + 1) % images.length;
 
-  let next = (i + 1) % images.length;
+  // change image (same tab)
+  document.getElementById("img").src = images[i];
 
-  // 1️⃣ open NEXT image in NEW TAB
-  window.open("view.html?i=" + next, "_blank");
+  // open ad in new tab
+  const adTab = window.open(ads[i], "_blank");
 
-  // 2️⃣ open AD in CURRENT TAB
-  window.location.href = ads[i];
+  // try to keep focus on main tab (NOT guaranteed)
+  if (adTab) {
+    window.focus();
+  }
 
-};
+});
 
 </script>
 
